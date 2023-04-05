@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import useToken from "../../hooks/useToken";
 import img from "../../assets/signin.jpg";
@@ -16,15 +16,13 @@ const SignIn = () => {
   const { signIn } = useContext(AuthContext);
 
   const { loginError, setLoginError } = useState("");
-  const [createdUserEmail, setCreatedUserEmail] = useState("");
 
   const [loginUserEmail, setLoginUserEmail] = useState("");
-  const [token] = useToken(loginUserEmail, createdUserEmail);
+  const [token] = useToken(loginUserEmail);
 
-  const location = useLocation();
   const navigate = useNavigate();
 
-  const from = location.state?.from?.pathname || "/";
+  const from = "/";
 
   if (token) {
     navigate(from);
@@ -46,7 +44,6 @@ const SignIn = () => {
           toast.error("Wrong Password!");
         }
         setLoginError(e);
-        setCreatedUserEmail(null);
       });
   };
 

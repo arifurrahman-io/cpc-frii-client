@@ -96,8 +96,6 @@ const SignUp = () => {
     return <Loading></Loading>;
   }
 
-  
-
   return (
     <div className=" py-8 lg:py-16">
       <div className="hero-content flex-col lg:flex-row mx-auto">
@@ -109,6 +107,19 @@ const SignUp = () => {
             Registration Form
           </h2>
           <form onSubmit={handleSubmit(handleSignUp)}>
+            <div className="form-control w-full mt-5">
+              <input
+                type="text"
+                {...register("id", { required: "ID is Required." })}
+                className="input input-bordered w-full "
+                placeholder="Student ID"
+              />
+              {errors.id && (
+                <p className="text-red-600" role="alert">
+                  {errors.id?.message}
+                </p>
+              )}
+            </div>
             <div className="form-control w-full mt-5">
               <input
                 type="text"
@@ -155,8 +166,8 @@ const SignUp = () => {
               )}
             </div>
 
-            <div className="flex">
-              <div className="form-control w-full mr-2 mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              <div className="form-control w-full mt-5">
                 <select
                   {...register("branch")}
                   className="input input-bordered w-full"
@@ -168,7 +179,7 @@ const SignUp = () => {
                 </select>
               </div>
 
-              <div className="form-control w-full ml-2 mt-5">
+              <div className="form-control w-full mt-5">
                 <select
                   {...register("level")}
                   className="input input-bordered w-full"
@@ -179,10 +190,7 @@ const SignUp = () => {
                   <option value="Ten">Ten</option>
                 </select>
               </div>
-            </div>
-
-            <div className="flex">
-              <div className="form-control w-full mr-2 mt-5">
+              <div className="form-control w-full mt-5">
                 <select
                   {...register("section")}
                   className="input input-bordered w-full"
@@ -197,20 +205,6 @@ const SignUp = () => {
                   <option value="G">G</option>
                   <option value="H">H</option>
                 </select>
-              </div>
-
-              <div className="form-control w-full ml-2 mt-5">
-                <input
-                  type="text"
-                  {...register("id", { required: "ID is Required." })}
-                  className="input input-bordered w-full "
-                  placeholder="Student ID"
-                />
-                {errors.id && (
-                  <p className="text-red-600" role="alert">
-                    {errors.id?.message}
-                  </p>
-                )}
               </div>
             </div>
 

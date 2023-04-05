@@ -57,7 +57,7 @@ const CourseDetails = () => {
         <div className="flex my-5">
           <img src={photo} alt="" className="w-20 rounded-full mr-2"></img>
           <div className="my-auto">
-            <p className="text-xl font-acme">Instructor</p>
+            <p className="text-xl font-acme">Mentor</p>
             <p className="font-courgette">{mentor}</p>
             <p className="font-ubuntu">{designation}</p>
           </div>

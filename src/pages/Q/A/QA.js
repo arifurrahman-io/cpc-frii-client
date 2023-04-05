@@ -110,7 +110,7 @@ const QA = () => {
       <div>
         {messages?.length &&
           messages.map((msg) => (
-            <MessageCard key={msg._key} msg={msg}></MessageCard>
+            <MessageCard key={msg._id} msg={msg}></MessageCard>
           ))}
       </div>
     </div>

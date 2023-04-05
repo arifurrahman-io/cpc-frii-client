@@ -17,7 +17,7 @@ const VerifiedUserRouter = ({ children }) => {
     return children;
   } else {
     toast.error(
-      "You are not verified by admin. Please wait for verification..."
+      "You are not a verified user. Please register and wait for verification..."
     );
     return <Navigate to="/" state={{ from: location }} replace></Navigate>;
   }

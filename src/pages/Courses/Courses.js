@@ -22,7 +22,7 @@ const Courses = () => {
       <h2 className="text-center font-bold text-4xl my-10 font-ubuntu">
         Courses
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-2 mb-40">
         {courses?.length &&
           courses.map((course) => (
             <AllCourseCard key={course._id} course={course}></AllCourseCard>
