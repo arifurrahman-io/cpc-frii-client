@@ -3,10 +3,39 @@ import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 import useAdmin from "../hooks/useAdmin";
 import Navebar from "../shared/Navebar";
+import { useQuery } from "@tanstack/react-query";
 
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
+
+  const url = `https://server.cpc.frii.edu.bd/unreadsmessages`;
+  const { data: unreadmessages = [] } = useQuery({
+    queryKey: ["unreadmessages"],
+    queryFn: async () => {
+      const res = await fetch(url, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
+      const data = await res.json();
+      return data;
+    },
+  });
+
+  const url2 = `https://server.cpc.frii.edu.bd/unverifiedstudents`;
+  const { data: unverified = [] } = useQuery({
+    queryKey: ["unverified"],
+    queryFn: async () => {
+      const res = await fetch(url2, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
+      const data = await res.json();
+      return data;
+    },
+  });
 
   return (
     <div>
@@ -52,7 +81,16 @@ const DashboardLayout = () => {
               {isAdmin && (
                 <>
                   <li>
-                    <Link to="/dashboard/manageusers">Student List</Link>
+                    <Link to="/dashboard/manageusers">
+                      Student List
+                      {unverified?.length ? (
+                        <span className="ml-2 bg-rose-500 rounded-full px-2 text-white">
+                          {unverified?.length}
+                        </span>
+                      ) : (
+                        <span></span>
+                      )}
+                    </Link>
                   </li>
                   <li>
                     <Link to="/dashboard/coursepannel">Courses</Link>
@@ -66,7 +104,16 @@ const DashboardLayout = () => {
                     <Link to="/dashboard/addmodule">Add Module</Link>
                   </li>
                   <li>
-                    <Link to="/dashboard/studentsmessage">Messages</Link>
+                    <Link to="/dashboard/studentsmessage">
+                      Messages
+                      {unreadmessages?.length ? (
+                        <span className="ml-2 bg-rose-500 rounded-full px-2 text-white">
+                          {unreadmessages?.length}
+                        </span>
+                      ) : (
+                        <p className="ml-2 bg-white rounded-full p-1 text-white hidden"></p>
+                      )}
+                    </Link>
                   </li>
                 </>
               )}

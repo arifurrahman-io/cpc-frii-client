@@ -43,7 +43,8 @@ const SignUp = () => {
               data.branch,
               data.level,
               data.section,
-              data.id
+              data.id,
+              data.gender
             );
           })
           .catch((err) => console.error(err));
@@ -64,6 +65,7 @@ const SignUp = () => {
     level,
     section,
     id,
+    gender,
     userType = "student",
     status = "unverified"
   ) => {
@@ -75,6 +77,7 @@ const SignUp = () => {
       level,
       section,
       id,
+      gender,
       userType,
       status,
     };
@@ -166,7 +169,7 @@ const SignUp = () => {
               )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <div className="form-control w-full mt-5">
                 <select
                   {...register("branch")}
@@ -190,6 +193,8 @@ const SignUp = () => {
                   <option value="Ten">Ten</option>
                 </select>
               </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <div className="form-control w-full mt-5">
                 <select
                   {...register("section")}
@@ -204,6 +209,16 @@ const SignUp = () => {
                   <option value="F">F</option>
                   <option value="G">G</option>
                   <option value="H">H</option>
+                </select>
+              </div>
+              <div className="form-control w-full mt-5">
+                <select
+                  {...register("gender")}
+                  className="input input-bordered w-full"
+                >
+                  <option value="n/a">Select Gender</option>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
                 </select>
               </div>
             </div>

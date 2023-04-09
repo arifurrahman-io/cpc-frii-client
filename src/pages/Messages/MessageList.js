@@ -9,7 +9,7 @@ const MessageList = ({ message, i, setSelectedMessage }) => {
       <th>{i + 1}</th>
       <td>{message?.name}</td>
       <td>{message?.email}</td>
-      <td>{message?.message}</td>
+      <td>{message?.message?.slice(0, 50)}...</td>
       <td>{message?.time}</td>
       <td>{message?.date}</td>
       <td>
