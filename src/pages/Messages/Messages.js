@@ -11,7 +11,7 @@ const Messages = () => {
     queryKey: ["messages"],
     queryFn: async () => {
       const res = await fetch(
-        `https://server.cpc.frii.edu.bd/dashboard/studentsmessage`
+        `https://server.arifur.xyz/dashboard/studentsmessage`
       );
       const data = await res.json();
       return data;

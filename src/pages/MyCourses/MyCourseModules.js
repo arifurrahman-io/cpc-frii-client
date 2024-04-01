@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CourseCard from "../CourseCard/CourseCard";
+import CourseCard from "./CourseCard/CourseCard";
 import VideoModal from "../Modal/VideoModal";
 import { Link, useLoaderData } from "react-router-dom";
 import { useContext } from "react";
@@ -42,7 +42,7 @@ const MyCourseModules = () => {
             <p className="mt-5 text-center font-acme">
               Join to Our Facebook Group:
               <Link
-                to="https://www.facebook.com/groups/friicpcf"
+                to="https://www.facebook.com/learnwitharifurrahman"
                 className="btn btn-sm btn-primary text-white ml-3"
               >
                 <FaFacebookF />
@@ -57,7 +57,7 @@ const MyCourseModules = () => {
             <p className="mt-5 text-center font-acme">
               Join to Our Facebook Group:
               <Link
-                to="https://www.facebook.com/groups/friicpc"
+                to="https://www.facebook.com/learnwitharifurrahman"
                 className="btn btn-sm btn-primary text-white ml-3"
               >
                 <FaFacebookF />

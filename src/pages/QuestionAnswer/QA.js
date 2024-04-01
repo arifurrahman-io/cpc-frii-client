@@ -1,8 +1,8 @@
 import React from "react";
 import { useContext } from "react";
-import { AuthContext } from "../../../context/AuthProvider";
+import { AuthContext } from "../../context/AuthProvider";
 import { useForm } from "react-hook-form";
-import Loading from "../../../shared/Loading";
+import Loading from "../../shared/Loading";
 import { toast } from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import MessageCard from "./MessageCard";
@@ -14,7 +14,7 @@ const QA = () => {
     queryKey: ["messages"],
     queryFn: async () => {
       const res = await fetch(
-        `https://server.cpc.frii.edu.bd/mymessages/${user.email}`
+        `https://server.arifur.xyz/mymessages/${user.email}`
       );
       const data = await res.json();
       return data;
@@ -53,7 +53,7 @@ const QA = () => {
       time,
     };
 
-    fetch(`https://server.cpc.frii.edu.bd/postmessage/${email}`, {
+    fetch(`https://server.arifur.xyz/postmessage/${email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

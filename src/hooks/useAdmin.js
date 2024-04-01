@@ -5,7 +5,7 @@ const useAdmin = (email) => {
   const [isAdminLoading, setIsAdminLoading] = useState(true);
   useEffect(() => {
     if (email) {
-      fetch(`https://server.cpc.frii.edu.bd/users/admin/${email}`)
+      fetch(`https://server.arifur.xyz/users/admin/${email}`)
         .then((res) => res.json())
         .then((data) => {
           setIsAdmin(data.isAdmin);

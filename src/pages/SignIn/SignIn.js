@@ -55,6 +55,9 @@ const SignIn = () => {
         </div>
         <div className="card w-full lg:w-1/2">
           <div onSubmit={handleSubmit}>
+          <h2 className="text-center text-2xl font-semibold mb-4">
+            Sign in Form for Students
+          </h2>
             <form onSubmit={handleSubmit(handleLogin)}>
               <div className="form-control w-full ">
                 <input
@@ -88,14 +91,14 @@ const SignIn = () => {
               </div>
 
               <input
-                className="btn bg-green-400 border-0 w-full mt-5 text-white"
+                className="btn btn-primary border-0 w-full mt-5 text-white"
                 value="Signin"
                 type="submit"
               />
 
               <div className="mt-8 text-center">
                 <p>
-                  New to FRII CPC? <Link to="/signup">Sign Up Now</Link>
+                  Not a registered student? <Link to="/signup">Sign Up Now!</Link>
                 </p>
               </div>
 

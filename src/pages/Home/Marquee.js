@@ -8,9 +8,7 @@ const MyMarquee = () => {
         <span className="text-amber-600">
           &nbsp;&nbsp;-Important-&nbsp;&nbsp;
         </span>
-        Dear Members, Programming class videos will be released every Monday and
-        Friday at 9 pm from now. To know more you can send message from the Q/A
-        section on your dashboard. - Stay with CPC.
+        Dear Members, Fundamentals of Python Programming Course has been released.
       </Marquee>
     </div>
   );

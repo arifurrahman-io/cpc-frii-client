@@ -28,7 +28,7 @@ const MessageModal = ({ selectedMessage, refetch }) => {
 
   const sendReplay = (replay, replayDate, replayTime) => {
     const adminReplay = { replay, replayDate, replayTime };
-    fetch(`https://server.cpc.frii.edu.bd/replay/${selectedMessage?.email}`, {
+    fetch(`https://server.arifur.xyz/replay/${selectedMessage?.email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

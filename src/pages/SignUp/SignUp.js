@@ -18,7 +18,6 @@ const SignUp = () => {
 
   const [createdUserEmail, setCreatedUserEmail] = useState("");
   const [token] = useToken(createdUserEmail);
-
   const navigate = useNavigate();
 
   if (token) {
@@ -36,16 +35,7 @@ const SignUp = () => {
 
         updateUser(userInfo)
           .then(() => {
-            saveUser(
-              data.name,
-              data.email,
-              data.phone,
-              data.branch,
-              data.level,
-              data.section,
-              data.id,
-              data.gender
-            );
+            saveUser(data.name, data.email, data.phone, data.gender);
           })
           .catch((err) => console.error(err));
       })
@@ -61,10 +51,6 @@ const SignUp = () => {
     name,
     email,
     phone,
-    branch,
-    level,
-    section,
-    id,
     gender,
     userType = "student",
     status = "unverified"
@@ -73,15 +59,11 @@ const SignUp = () => {
       name,
       email,
       phone,
-      branch,
-      level,
-      section,
-      id,
       gender,
       userType,
       status,
     };
-    fetch("https://server.cpc.frii.edu.bd/users", {
+    fetch("https://server.arifur.xyz/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -107,22 +89,9 @@ const SignUp = () => {
         </div>
         <div onSubmit={handleSubmit} className="card w-full lg:w-1/2">
           <h2 className="text-center text-2xl font-semibold">
-            Registration Form
+            Registration Form for Students
           </h2>
           <form onSubmit={handleSubmit(handleSignUp)}>
-            <div className="form-control w-full mt-5">
-              <input
-                type="text"
-                {...register("id", { required: "ID is Required." })}
-                className="input input-bordered w-full "
-                placeholder="Student ID"
-              />
-              {errors.id && (
-                <p className="text-red-600" role="alert">
-                  {errors.id?.message}
-                </p>
-              )}
-            </div>
             <div className="form-control w-full mt-5">
               <input
                 type="text"
@@ -169,58 +138,14 @@ const SignUp = () => {
               )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <div className="form-control w-full mt-5">
-                <select
-                  {...register("branch")}
-                  className="input input-bordered w-full"
-                >
-                  <option value="n/a">Select Branch</option>
-                  <option value="Banasree">Banasree</option>
-                  <option value="Malibag">Malibag</option>
-                  <option value="Mohammadpur">Mohammadpur</option>
-                </select>
-              </div>
-
-              <div className="form-control w-full mt-5">
-                <select
-                  {...register("level")}
-                  className="input input-bordered w-full"
-                >
-                  <option value="n/a">Select Class</option>
-                  <option value="Eight">Eight</option>
-                  <option value="Nine">Nine</option>
-                  <option value="Ten">Ten</option>
-                </select>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <div className="form-control w-full mt-5">
-                <select
-                  {...register("section")}
-                  className="input input-bordered w-full"
-                >
-                  <option value="n/a">Select Section</option>
-                  <option value="A">A</option>
-                  <option value="B">B</option>
-                  <option value="C">C</option>
-                  <option value="D">D</option>
-                  <option value="E">E</option>
-                  <option value="F">F</option>
-                  <option value="G">G</option>
-                  <option value="H">H</option>
-                </select>
-              </div>
-              <div className="form-control w-full mt-5">
-                <select
-                  {...register("gender")}
-                  className="input input-bordered w-full"
-                >
-                  <option value="n/a">Select Gender</option>
-                  <option value="M">Male</option>
-                  <option value="F">Female</option>
-                </select>
-              </div>
+            <div className="form-control w-full mt-5">
+              <select
+                {...register("gender")}
+                className="input input-bordered w-full">
+                <option value="n/a">Select Gender</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+              </select>
             </div>
 
             <div className="form-control w-full mt-5">
@@ -244,14 +169,15 @@ const SignUp = () => {
             </div>
 
             <input
-              className="btn bg-purple-400 border-0 w-full mt-5 text-white"
+              className="btn bg-primary border-0 w-full mt-5 text-white"
               value="Register"
               type="submit"
             />
           </form>
           <div className="text-center mt-8">
             <p>
-              Alrady a member? <Link to="/signin">Please Sign In</Link>{" "}
+              Alrady a registered student?{" "}
+              <Link to="/signin">Please Sign In!</Link>{" "}
             </p>
           </div>
         </div>

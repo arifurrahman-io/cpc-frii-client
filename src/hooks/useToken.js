@@ -5,7 +5,7 @@ const useToken = (email) => {
 
   useEffect(() => {
     if (email) {
-      fetch(`https://server.cpc.frii.edu.bd/jwt?email=${email}`)
+      fetch(`https://server.arifur.xyz/jwt?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.accessToken) {

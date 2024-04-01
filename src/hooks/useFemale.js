@@ -5,7 +5,7 @@ const useFemale = (email) => {
   const [isFemaleLoading, setIsFemaleLoading] = useState(true);
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:5000/users/female/${email}`)
+      fetch(`https://server.arifur.xyz/users/female/${email}`)
         .then((res) => res.json())
         .then((data) => {
           setIsFemale(data.isFemale);

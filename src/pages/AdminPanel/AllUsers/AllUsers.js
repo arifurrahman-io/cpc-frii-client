@@ -14,7 +14,7 @@ const AllUsers = () => {
   const [searchData, setSearchData] = useState();
 
   const handleSearch = (data) => {
-    const url = `https://server.cpc.frii.edu.bd/search/${data.branch}/${data.level}/${data.section}`;
+    const url = `https://server.arifur.xyz/search/${data.email}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -27,14 +27,14 @@ const AllUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("https://server.cpc.frii.edu.bd/users/student");
+      const res = await fetch("https://server.arifur.xyz/users/student");
       const data = await res.json();
       return data;
     },
   });
 
   const handleVerify = (email) => {
-    fetch(`https://server.cpc.frii.edu.bd/user/status/verify/${email}`, {
+    fetch(`https://server.arifur.xyz/user/status/verify/${email}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -50,7 +50,7 @@ const AllUsers = () => {
   };
 
   const handleUnVerify = (email) => {
-    fetch(`https://server.cpc.frii.edu.bd/user/status/${email}`, {
+    fetch(`https://server.arifur.xyz/user/status/${email}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -68,7 +68,7 @@ const AllUsers = () => {
   const handleDelete = (id) => {
     const agree = window.confirm(`Are you sure to delete the student?`);
     if (agree) {
-      fetch(`https://server.cpc.frii.edu.bd/user/${id}`, {
+      fetch(`https://server.arifur.xyz/user/${id}`, {
         method: "DELETE",
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -92,57 +92,25 @@ const AllUsers = () => {
         <div onSubmit={handleSubmit} className="mx-auto">
           <form
             onSubmit={handleSubmit(handleSearch)}
-            className="grid grid-cols-2 md:grid-cols-4 gap-2 my-3"
-          >
-            <div className="form-control w-full ">
+            className="grid grid-cols-2 gap-2 mb-2 justify-start">
+            <div className="form-control w-full h-8">
               <input
                 type="text"
-                {...register("branch", {
-                  required: "Branch is Required.",
+                {...register("email", {
+                  required: "Email is Required.",
                 })}
                 className="input input-bordered w-full "
-                placeholder="Branch"
+                placeholder="Email"
               />
-              {errors.branch && (
+              {errors.email && (
                 <p className="text-red-600" role="alert">
-                  {errors.branch?.message}
-                </p>
-              )}
-            </div>
-            <div className="form-control w-full">
-              <input
-                type="text"
-                {...register("level", {
-                  required: "Class is Required",
-                })}
-                className="input input-bordered w-full"
-                placeholder="Class"
-              />
-              {errors.level && (
-                <p className="text-red-600" role="alert">
-                  {errors.level?.message}
-                </p>
-              )}
-            </div>
-
-            <div className="form-control w-full ">
-              <input
-                type="text"
-                {...register("section", {
-                  required: "Section is Required",
-                })}
-                className="input input-bordered w-full"
-                placeholder="Section"
-              />
-              {errors.section && (
-                <p className="text-red-600" role="alert">
-                  {errors.section?.message}
+                  {errors.email?.message}
                 </p>
               )}
             </div>
 
             <input
-              className="btn bg-green-400 border-0 w-full text-white"
+              className="btn btn-primary btn-sm border-0 w-full text-white"
               value="Search"
               type="submit"
             />
@@ -157,10 +125,7 @@ const AllUsers = () => {
               <th>Name</th>
               <th>Phone</th>
               <th>Email</th>
-              <th>Branch</th>
-              <th>Class</th>
-              <th>Section</th>
-              <th>ID</th>
+              <th>Gender</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -174,17 +139,13 @@ const AllUsers = () => {
                     <td>{user.name}</td>
                     <td>{user.phone}</td>
                     <td>{user.email}</td>
-                    <td>{user.branch}</td>
-                    <td>{user.level}</td>
-                    <td>{user.section}</td>
-                    <td>{user.id}</td>
+                    <td>{user.gender}</td>
                     <td>
                       {user.status === "unverified" && (
                         <>
                           <button
                             onClick={() => handleVerify(user?.email)}
-                            className="btn btn-primary btn-xs"
-                          >
+                            className="btn btn-primary btn-xs">
                             Verify
                           </button>
                         </>
@@ -193,8 +154,7 @@ const AllUsers = () => {
                         <>
                           <button
                             onClick={() => handleUnVerify(user?.email)}
-                            className="btn btn-primary btn-xs"
-                          >
+                            className="btn btn-primary btn-xs">
                             <FaCheckCircle />
                             Verified
                           </button>
@@ -204,8 +164,7 @@ const AllUsers = () => {
                     <td>
                       <button
                         onClick={() => handleDelete(user._id)}
-                        className="btn btn-error btn-xs text-white"
-                      >
+                        className="btn btn-error btn-xs text-white">
                         Delete
                       </button>
                     </td>
@@ -220,17 +179,13 @@ const AllUsers = () => {
                     <td>{user.name}</td>
                     <td>{user.phone}</td>
                     <td>{user.email}</td>
-                    <td>{user.branch}</td>
-                    <td>{user.level}</td>
-                    <td>{user.section}</td>
-                    <td>{user.id}</td>
+                    <td>{user.gender}</td>
                     <td>
                       {user.status === "unverified" && (
                         <>
                           <button
                             onClick={() => handleVerify(user?.email)}
-                            className="btn btn-primary btn-xs"
-                          >
+                            className="btn btn-primary btn-xs">
                             Verify
                           </button>
                         </>
@@ -239,8 +194,7 @@ const AllUsers = () => {
                         <>
                           <button
                             onClick={() => handleUnVerify(user?.email)}
-                            className="btn btn-primary btn-xs"
-                          >
+                            className="btn btn-primary btn-xs">
                             <FaCheckCircle />
                             Verified
                           </button>
@@ -250,8 +204,7 @@ const AllUsers = () => {
                     <td>
                       <button
                         onClick={() => handleDelete(user._id)}
-                        className="btn btn-error btn-xs text-white"
-                      >
+                        className="btn btn-error btn-xs text-white">
                         Delete
                       </button>
                     </td>

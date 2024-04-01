@@ -1,10 +1,27 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { AuthContext } from "../../context/AuthProvider";
-import Loading from "../../shared/Loading";
+import { AuthContext } from "../../../context/AuthProvider";
+import Loading from "../../../shared/Loading";
+import { useQuery } from "@tanstack/react-query";
 
 const AddModule = () => {
+
+  const url = `https://server.arifur.xyz/coursename`;
+  const { data: courses = [] } = useQuery({
+    queryKey: ["courses"],
+    queryFn: async () => {
+      const res = await fetch(url, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
+      const data = await res.json();
+      return data;
+    },
+  });
+
+
   const {
     register,
     handleSubmit,
@@ -15,8 +32,8 @@ const AddModule = () => {
 
   const handleModule = (data) => {
     saveData(
+      data.courseName,
       data.courseId,
-      data.module,
       data.moduleID,
       data.lesson,
       data.url,
@@ -24,16 +41,16 @@ const AddModule = () => {
     );
   };
 
-  const saveData = (courseId, module, moduleID, lesson, url, assignment) => {
+  const saveData = (courseName, courseId, moduleID, lesson, url, assignment) => {
     const user = {
+      courseName,
       courseId,
-      module,
       moduleID,
       lesson,
       url,
       assignment,
     };
-    fetch("https://server.cpc.frii.edu.bd/postlesson", {
+    fetch("https://server.arifur.xyz/postlesson", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -60,47 +77,26 @@ const AddModule = () => {
             <form onSubmit={handleSubmit(handleModule)}>
               <div className="form-control w-full mr-2 mt-5">
                 <select
-                  {...register("courseId")}
-                  className="input input-bordered w-full"
-                >
-                  <option value="n/a">Select Course ID</option>
-                  <option value="cpc1">
-                    CPC1 - Fundamentals of C Language
-                  </option>
-                  <option value="cpc2">
-                    CPC2 - Fundamentals of HTML and CSS
-                  </option>
-                  <option value="cpc3">
-                    CPC3 - Fundamentals of JavaScript
-                  </option>
+                  {...register("courseName")}
+                  className="input input-bordered w-full">
+                  {courses.map((course, i) => (
+                    <option key={i} value={course.courseName}>{i+1}. {course.courseName}</option>
+                    
+                  ))}
                 </select>
               </div>
+
               <div className="form-control w-full mr-2 mt-5">
                 <select
-                  {...register("module")}
-                  className="input input-bordered w-full"
-                >
-                  <option value="n/a">Select Module</option>
-                  <option value="1: Introduction to Programming">
-                    1: Introduction to Programming
-                  </option>
-                  <option value="2: Data Types and Operators">
-                    2: Data Types and Operators
-                  </option>
-                  <option value="3: Control Structures">
-                    3. Control Structures
-                  </option>
-                  <option value="4: Arrays and Strings">
-                    4: Arrays and Strings
-                  </option>
-                  <option value="5: Functions">5: Functions</option>
-                  <option value="6: Pointers">6: Pointers</option>
-                  <option value="7: File Handling">7: File Handling</option>
-                  <option value="8: Miscellaneous Topics">
-                    8: Miscellaneous Topics
-                  </option>
+                  {...register("courseId")}
+                  className="input input-bordered w-full">
+                  {courses.map((course, i) => (
+                    <option key={i} value={course._id}>{i+1}. {course._id}</option>
+                    
+                  ))}
                 </select>
               </div>
+              
               <div className="form-control w-full mt-5">
                 <input
                   type="text"

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const MyAllCourses = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `https://server.cpc.frii.edu.bd/mycourses/${user?.email}`;
+  const url = `https://server.arifur.xyz/mycourses/${user?.email}`;
   const { data: courses = [] } = useQuery({
     queryKey: ["courses"],
     queryFn: async () => {
@@ -26,7 +26,7 @@ const MyAllCourses = () => {
       <div>
         {courses?.length ? (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {courses.map((course) => (
+            {courses.filter((item) => item.status === "verified").map((course) => (
               <MyAllCourseCard
                 key={course._id}
                 course={course}

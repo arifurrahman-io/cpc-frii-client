@@ -9,7 +9,7 @@ const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
 
-  const url = `https://server.cpc.frii.edu.bd/unreadsmessages`;
+  const url = `https://server.arifur.xyz/unreadsmessages`;
   const { data: unreadmessages = [] } = useQuery({
     queryKey: ["unreadmessages"],
     queryFn: async () => {
@@ -23,7 +23,7 @@ const DashboardLayout = () => {
     },
   });
 
-  const url2 = `https://server.cpc.frii.edu.bd/unverifiedstudents`;
+  const url2 = `https://server.arifur.xyz/unverifiedstudents`;
   const { data: unverified = [] } = useQuery({
     queryKey: ["unverified"],
     queryFn: async () => {
@@ -93,7 +93,22 @@ const DashboardLayout = () => {
                     </Link>
                   </li>
                   <li>
+                    <Link to="/dashboard/manageenrollment">
+                      Manage Enrollments
+                    </Link>
+                  </li>
+                  <li>
                     <Link to="/dashboard/coursepannel">Courses</Link>
+                  </li>
+                  <li>
+                    <Link to="/dashboard/addmentor">
+                      Add Mentor Details
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/dashboard/coursename">
+                      Add Course Name
+                    </Link>
                   </li>
                   <li>
                     <Link to="/dashboard/addcoursedetails">

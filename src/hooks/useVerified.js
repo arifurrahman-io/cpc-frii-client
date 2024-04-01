@@ -5,7 +5,7 @@ const useVerified = (email) => {
   const [isVerifiedLoading, setIsVerifiedLoading] = useState(true);
   useEffect(() => {
     if (email) {
-      fetch(`https://server.cpc.frii.edu.bd/users/verified/${email}`)
+      fetch(`https://server.arifur.xyz/users/verified/${email}`)
         .then((res) => res.json())
         .then((data) => {
           setIsVerified(data.isVerified);

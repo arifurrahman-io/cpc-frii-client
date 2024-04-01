@@ -25,6 +25,9 @@ const Navebar = () => {
       <li>
         <Link to="/courses">Courses</Link>
       </li>
+      <li>
+        <Link to="/contact">Contact</Link>
+      </li>
 
       {user?.uid ? (
         (!isAdmin && (
@@ -78,6 +81,12 @@ const Navebar = () => {
                   <Link to="/dashboard/manageusers">Student List</Link>
                 </li>
                 <li>
+                  <Link to="/dashboard/manageenrollment">Manage Enrollments</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/addmentor">Add Mentor Details</Link>
+                </li>
+                <li>
                   <Link to="/dashboard/coursepannel">Courses</Link>
                 </li>
                 <li>
@@ -112,7 +121,7 @@ const Navebar = () => {
   );
 
   return (
-    <div className="bg-[#364F6B] px-5">
+    <div className="bg-indigo-700 px-5">
       <div className="navbar flex justify-between">
         <div className="navbar-start">
           {/* <label
@@ -142,7 +151,7 @@ const Navebar = () => {
               className="btn btn-ghost normal-case text-lg md:text-xl"
             >
               <img src={logo} className="w-6 md:w-8 mx-2" alt="" />
-              FRII CPC
+              Arifur Rahman
             </Link>
           </div>
         </div>

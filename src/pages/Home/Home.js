@@ -2,13 +2,13 @@ import React from "react";
 import Banner from "./Banner";
 import Importance from "./Importance";
 import About from "./About";
-import MyMarquee from "./Marquee";
+import Experience from "./Experience";
 
 const Home = () => {
   return (
     <div>
       <Banner></Banner>
-      <MyMarquee></MyMarquee>
+      <Experience></Experience>
       <About></About>
       <Importance></Importance>
     </div>

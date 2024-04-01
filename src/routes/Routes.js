@@ -1,25 +1,30 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
 import Main from "../layout/Main";
-import AddModule from "../pages/AddModule/AddModule";
-import AllUsers from "../pages/AllUsers/AllUsers";
+import AddModule from "../pages/AdminPanel/AddModule/AddModule";
+import AllUsers from "../pages/AdminPanel/AllUsers/AllUsers";
 import Blog from "../pages/Blog/Blog";
-import Dashboard from "../pages/Dashboard/Dashboard";
+import Dashboard from "../pages/AdminPanel/Dashboard/Dashboard";
 import Home from "../pages/Home/Home";
-import QA from "../pages/Q/A/QA";
 import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/SignUp/SignUp";
 import AdminRoute from "./AdminRoute";
 import PrivateRouter from "./PrivateRouter";
 import VerifiedUserRouter from "./VerifiedUserRouter";
 import Courses from "../pages/Courses/Courses";
-import CoursePannel from "../pages/CoursePannel/CoursePannel";
-import AddCourseDetails from "../pages/AddCourseDetails/AddCourseDetails";
+import CoursePannel from "../pages/AdminPanel/CoursePannel/CoursePannel";
+import AddCourseDetails from "../pages/AdminPanel/AddCourseDetails/AddCourseDetails";
 import CourseDetails from "../pages/Courses/CourseDetails";
 import MyAllCourses from "../pages/MyCourses/MyAllCourses";
 import MyCourseModules from "../pages/MyCourses/MyCourseModules";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Messages from "../pages/Messages/Messages";
+import Contact from "../pages/contact/Contact";
+import QA from "../pages/QuestionAnswer/QA";
+import AddMentors from "../pages/AdminPanel/AddMentors/AddMentors";
+import Checkout from "../pages/Courses/Checkout";
+import ManageEnrollments from "../pages/AdminPanel/enrollments/ManageEnrollments";
+import AddCourseName from "../pages/AdminPanel/AddCourseDetails/AddCourseName";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +44,10 @@ const router = createBrowserRouter([
         element: <Blog></Blog>,
       },
       {
+        path: "/contact",
+        element: <Contact></Contact>,
+      },
+      {
         path: "/signup",
         element: <SignUp></SignUp>,
       },
@@ -48,16 +57,18 @@ const router = createBrowserRouter([
       },
       {
         path: "/coursedetails/:id",
-        element: (
-          <PrivateRouter>
-            <VerifiedUserRouter>
-              <CourseDetails></CourseDetails>
-            </VerifiedUserRouter>
-          </PrivateRouter>
-        ),
+        element: <CourseDetails></CourseDetails>,
         loader: ({ params }) =>
-          fetch(`https://server.cpc.frii.edu.bd/coursedetails/${params.id}`),
+          fetch(`https://server.arifur.xyz/coursedetails/${params.id}`),
       },
+
+      {
+        path: "/checkout/:id",
+        element: <Checkout></Checkout>,
+        loader: ({ params }) =>
+          fetch(`https://server.arifur.xyz/checkout/${params.id}`),
+      },
+
       {
         path: "*",
         element: <ErrorPage></ErrorPage>,
@@ -83,6 +94,30 @@ const router = createBrowserRouter([
             <AllUsers></AllUsers>
           </AdminRoute>
         ),
+      },
+      {
+        path: "/dashboard/manageenrollment",
+        element: (
+          <AdminRoute>
+            <ManageEnrollments></ManageEnrollments>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/addmentor",
+        element: (
+          <AdminRoute>
+            <AddMentors></AddMentors>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/coursename",
+        element:(
+          <AdminRoute>
+            <AddCourseName></AddCourseName>
+          </AdminRoute>
+        )
       },
       {
         path: "/dashboard/addcoursedetails",
@@ -121,7 +156,7 @@ const router = createBrowserRouter([
         element: <MyCourseModules></MyCourseModules>,
         loader: ({ params }) =>
           fetch(
-            `https://server.cpc.frii.edu.bd/dashboard/coursemodules/${params.courseId}`
+            `https://server.arifur.xyz/dashboard/coursemodules/${params.courseId}`
           ),
       },
       {

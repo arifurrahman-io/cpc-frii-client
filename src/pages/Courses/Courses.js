@@ -3,7 +3,7 @@ import React from "react";
 import AllCourseCard from "./AllCourseCard";
 
 const Courses = () => {
-  const url = `https://server.cpc.frii.edu.bd/courses`;
+  const url = `https://server.arifur.xyz/courses`;
   const { data: courses = [] } = useQuery({
     queryKey: ["courses"],
     queryFn: async () => {
